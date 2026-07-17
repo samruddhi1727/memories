@@ -1,0 +1,92 @@
+dispatch(commentPost(`${user?.result?.name}: ${comment}`, post._id))
+API.post(`/posts/${id}/commentPost`, { value })
+
+    const { id } = req.params;
+    const { value } = req.body;
+
+    const post = await PostMessage.findById(id);
+
+    post.comments.push(value);
+
+    const updatedPost = await PostMessage.findByIdAndUpdate(id, post, { new: true });
+
+    res.json(updatedPost);
+
+comment file -
+  const handleComment = async () => {
+  const newComments = await dispatch(commentPost(`${user?.result?.name}: ${comment}`, post._id));
+  setComment('');
+  setComments(newComments);
+};
+  api file -
+  export const comment = (value, id) => API.post(`/posts/${id}/commentPost`, { value });
+  actions file -
+export const commentPost = (value, id) => async (dispatch) => {
+  try {
+    const { data } = await api.comment(value, id);
+
+    dispatch({ type: COMMENT, payload: data });
+
+    return data.comments;
+  } catch (error) {
+    console.log(error);
+  }
+};
+redux reducer- 
+export default (state = { isLoading: true, posts: [] }, action) => {
+    switch (action.type) {
+       case COMMENT:
+      return {
+        ...state,
+        posts: state.posts.map((post) => {
+          if (post._id == +action.payload._id) {
+            return action.payload;
+          }
+          return post;
+        }),
+      };
+    }
+} here flow is - comment file> actions file > api file > and have reducer too
+write code for me with modern version of redux toolkit and combine all api actions in one function. let me share my redux-
+... 
+note- i have different posts and postDetails , comment and comment state in redux you have to use postDetails post.id 
+
+
+
+
+
+
+for pagination 
+1.posts 
+2.hooks > usegetallpost 
+3.redux > allpostSlice 
+
+backend changes 
+4.post controller 
+export const getAllPosts = async (req, res) => {
+
+    try {
+        const keyword = req.query.keyword || "";
+        const query = {
+            $or: [
+                { title: { $regex: keyword, $options: "i" } },
+                { tags: { $regex: keyword, $options: "i" } },
+            ]
+        };
+        const posts = await postModel.find(query).sort({ createdAt: -1 });
+        if (!posts) {
+            return res.status(404).json({
+                message: "sammu post not found.",
+                success: false
+            })
+        };
+        return res.status(200).json({
+           posts,
+            success: true
+        })
+    } catch (error) {
+        console.log("getting error sam 22:22")
+        console.log(error);
+        res.status(404).json({success: false, message: error.message });
+    }
+}

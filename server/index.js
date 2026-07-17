@@ -6,6 +6,7 @@ import cors from 'cors';
 import 'dotenv/config';
 import connectDB from './config/mongodb.js';
 import authRouter from "./routes/authRoutes.js";
+import userRouter from "./routes/userRoutes.js";
 import postRouter from "./routes/postRoutes.js";
 
 const app = express();
@@ -19,8 +20,10 @@ app.use(cors({
   credentials: true
 }));
 
+app.use("/uploads", express.static("uploads"));
 app.use("/auth", authRouter);
-app.use('/post', postRouter);
+app.use("/user", userRouter);
+app.use("/post", postRouter);
 
 app.get('/', (req, res) => {
   res.send('welcome to social media web app')
