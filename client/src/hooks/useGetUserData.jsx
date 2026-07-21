@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react"
+import { useEffect } from "react"
 import axios from "axios"
 import toast from 'react-hot-toast';
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { setUserData } from "../redux/userDataSlice";
 
 const useGetUserData = async () => {
@@ -14,7 +14,7 @@ const useGetUserData = async () => {
         const fetchUserData = async () => {
             try {
                 const { data } = await axios.get(bendurl + '/user/data');
-                data.success ?  dispatch(setUserData(data.userData)) : toast.error(data.message);
+                data.success ? dispatch(setUserData(data.userData)) : toast.error(data.message);
 
             } catch (error) {
                 toast.error(error.message);
