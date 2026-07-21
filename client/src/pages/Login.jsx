@@ -30,7 +30,7 @@ const Login = () => {
         if (data.success) {
 
           setTimeout(() => {
-            navigate('/posts')
+            navigate('/home')
           }, 1000);
           toast.success("Sign Up successfully");
         } else {
@@ -40,7 +40,7 @@ const Login = () => {
         const { data } = await axios.post(bendurl + '/auth/signin', { email, password })
         if (data.success) {
           setTimeout(() => {
-            navigate('/posts')
+            navigate('/home')
           }, 1000);
           toast.success("Sign In successfully");
         } else {
@@ -53,48 +53,68 @@ const Login = () => {
   }
 
   return (
-    <>
-      <div className="bodyy">
-        <div className="formContainer">
-          {isSubmitting && <p className="InputFieldError">Loading...</p>}
-          <h2>{state === 'SignUp' ? 'Create Account ' : 'Login'}</h2>
-          <p>{state === 'SignUp' ? 'Create your account ' : 'Login to your account'}</p>
 
-          <form onSubmit={handleSubmit(onSubmitHandler)}>
-            {state === 'SignUp' && (
-              <>
-                <input placeholder="Name" type="text"
-                  {...register("name", {
-                    required: { value: true, message: "This field is required", },
-                    minLength: { value: 3, message: "Minimum 3 characters required", },
-                    maxLength: { value: 25, message: "Maximum 25 characters allowed", },
-                    pattern: { value: /^[A-Za-z]+$/, message: "Only letters and spaces allowed", },
-                  })}
-                ></input> {errors.name && <p className="InputFieldError">{errors.name.message}</p>}
-              </>
+    <div className="login-page">
+      <div className="login-form-wrapper">
+        {isSubmitting && <p className="login-loading">Loading...</p>}
+
+        <h2 className="login-title">
+          {state === "SignUp" ? "Create Account" : "Login"}
+        </h2>
+        <p className="login-subtitle">
+          {state === "SignUp" ? "Create your account" : "Login to your account"}
+        </p>
+
+        <form className="login-form" onSubmit={handleSubmit(onSubmitHandler)}>
+          {state === "SignUp" && (
+            <>
+              <input
+                placeholder="Name"
+                type="text"
+                {...register("name", {
+                  required: "This field is required",
+                  minLength: { value: 3, message: "Minimum 3 characters required" },
+                  maxLength: { value: 25, message: "Maximum 25 characters allowed" },
+                  pattern: { value: /^[A-Za-z ]+$/, message: "Only letters and spaces allowed" },
+                })}
+              />
+              {errors.name && <p className="login-error">{errors.name.message}</p>}
+            </>
+          )}
+
+          <input
+            placeholder="Email"
+            type="email"
+            {...register("email", {
+              required: "This field is required",
+              pattern: { value: /^\S+@\S+$/i, message: "Invalid email format" },
+            })}
+          />
+          {errors.email && <p className="login-error">{errors.email.message}</p>}
+
+          <input
+            placeholder="Password"
+            type="password"
+            {...register("password", {
+              required: "This field is required",
+            })}
+          />
+          {errors.password && <p className="login-error">{errors.password.message}</p>}
+
+          <button className="login-btn" type="submit" disabled={isSubmitting}>
+            {state}
+          </button>
+
+          <p className="login-toggle">
+            {state === "SignUp" ? (
+              <>have an account? <span onClick={() => setState("Login")}>Login here</span></>
+            ) : (
+              <>Don't have an account? <span onClick={() => setState("SignUp")}>Sign up</span></>
             )}
-
-            <input placeholder="Email" type="email" {...register("email", {
-              required: { value: true, message: "This field is required", },
-              pattern: { value: /^\S+@\S+$/i, message: "Invalid email format", },
-            })}></input> {errors.email && <p className="InputFieldError">{errors.email.message}</p>}
-
-
-            <input placeholder="Password" type="password"
-              {...register("password", {
-                required: { value: true, message: "This field is required", },
-
-              })}
-            ></input> {errors.password && <p className="InputFieldError">{errors.password.message}</p>}
-            <button className="btn" type="submit" disabled={isSubmitting}>{state}</button>
-
-            {state === 'SignUp' ? (<p> have an account ?? <span style={{ color: 'blue' }} onClick={() => setState('Login')}>Login here</span></p>)
-              : (<p>Don't have an account? <span style={{ color: 'blue' }} onClick={() => setState('SignUp')}>Sign up</span></p>)}
-
-          </form>
-        </div>
+          </p>
+        </form>
       </div>
-    </>
+    </div>
   )
 }
 
