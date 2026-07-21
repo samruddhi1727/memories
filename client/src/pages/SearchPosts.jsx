@@ -1,35 +1,34 @@
 import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { setSearchedQuery } from '../redux/allPostSlice'
 import useGetAllPosts from '../hooks/useGetAllPosts'
-import { useSelector } from 'react-redux'
+import { GoArrowLeft } from "react-icons/go";
+import { useNavigate } from "react-router-dom";
+import Post from '../components/Post';
 
 const SearchPosts = () => {
   useGetAllPosts();
-  const allpostinpostsearc = useSelector((state) => state.post.allPosts)
-  const sQinsp = useSelector((state) => state.post.searchedQuery)
+  const navigate = useNavigate();
+  const dispatch = useDispatch()
+
+  const allSearchedPosts = useSelector((state) => state.post.allPosts)
 
   return (
-    <div>
-      search Posstsss only
-      {/* {console.log("post using slice in searchposts..")}
-      {console.log(allpostinpostsearc)}
-      {console.log(allpostinpostsearc[0].title)}
-      {console.log("searchhqueryin sp")}{console.log(sQinsp)}
-      <br /><br />
-      {allpostinpostsearc[0].name}<br></br>
-      {allpostinpostsearc[0].title}<br />
-      {allpostinpostsearc[0].message}<br />
-      {allpostinpostsearc[0].tags}<br /> */}
+    <div className="search-page">
+      <header className="top-bar">
+        <GoArrowLeft
+          size={25} className="back-btn"
+          onClick={() => { navigate("/home"); dispatch(setSearchedQuery("")); }}
+        />
+      </header>
 
-      {allpostinpostsearc.map(post => (
-        <div key={post._id}>
-          <img src={post.selectedFile} alt="" /><br />
-          name:{post.name}<br />
-          title:{post.title}<br />
-          message:{post.message}<br />
-          tages:{post.tags}<br />
-        </div>
-      ))}
+      <div className="posts-container">
+        {allSearchedPosts.map((post) => (
+          <Post key={post._id} post={post} />
+        ))}
+      </div>
     </div>
+
   )
 }
 
