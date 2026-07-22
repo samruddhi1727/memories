@@ -10,7 +10,7 @@ import userRouter from "./routes/userRoutes.js";
 import postRouter from "./routes/postRoutes.js";
 
 const app = express();
-const port = process.env.PORT 
+const port = process.env.PORT
 connectDB();
 
 app.use(express.json());

@@ -20,7 +20,7 @@ export const signin = async (req, res) => {
 
         if (!isPasswordCorrect) return res.status(400).json({ success: false, message: "Invalid credentials" });
 
-        const token = jwt.sign({ email: user.email, id: user._id },  process.env.JWT_SECRET, { expiresIn: "5d" });
+        const token = jwt.sign({ id: user._id, email: user.email, name: user.name  },  process.env.JWT_SECRET, { expiresIn: "5d" });
         res.cookie('jwttoken', token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
@@ -50,7 +50,7 @@ export const signup = async (req, res) => {
 
         const user = await userModel.create({  name: name, email, password: hashedPassword });
 
-        const token = jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET, { expiresIn: "5d" });
+        const token = jwt.sign({ id: user._id, email: user.email, name: user.name }, process.env.JWT_SECRET, { expiresIn: "5d" });
         res.cookie('jwttoken', token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
@@ -60,5 +60,18 @@ export const signup = async (req, res) => {
         res.status(201).json({ success: true });
     } catch (error) {
         res.status(500).json({success: false, message: error.message });
+    }
+};
+
+export const logout = async (req, res) => {
+    try {
+        res.clearCookie('jwttoken', {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
+        })
+        return res.json({ success: true, message: "Logged Out" })
+    } catch (error) {
+        return res.json({ success: false, message: error.message });
     }
 };

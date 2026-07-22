@@ -1,15 +1,17 @@
 import jwt from "jsonwebtoken";
+
 const auth = async (req, res, next) => {
-    console.log("getting in auth mieddelare")
     const { jwttoken } = req.cookies;
+
     if (!jwttoken) {
         return res.json({ success: false, message: "Not Authorized, login Again" });
     }
 
     try {
         const tokenDecode = jwt.verify(jwttoken, process.env.JWT_SECRET);
-        if (tokenDecode.id) {
+        if (tokenDecode.id && tokenDecode.name) {
             req.userId = tokenDecode.id;
+            req.userName = tokenDecode.name;
         } else {
             return res.json({ success: false, message: "Not Authorized token not decode, Login Again" });
         }
@@ -17,8 +19,7 @@ const auth = async (req, res, next) => {
         next();
 
     } catch (error) {
-        console.log("error in meddleware")
-        console.log(error)
+
         return res.json({ success: false, message: error.message });
     }
 }
