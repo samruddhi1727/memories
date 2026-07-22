@@ -6,6 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux'
 import useGetAllPosts from '../hooks/useGetAllPosts'
 import { GoArrowLeft } from "react-icons/go";
+import { setFormType } from '../redux/allPostSlice';
 
 const Create = () => {
     const params = useParams()

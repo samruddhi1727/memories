@@ -1,8 +1,666 @@
 *{
-    margin: 0;
-    padding: 0;
+  padding: 0;
+  margin:0;
 }
-img{
-    height:200px;
-    width: 300px;
+body{
+  background-color: #000;
+  /* color:white; */
+}
+/* Login.css */
+.login-page {
+  max-width: 400px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: #000;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.login-form-wrapper {
+  width: 100%;
+  max-width: 350px;
+}
+
+.login-loading {
+  text-align: center;
+  color: #a8a8a8;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.login-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.login-subtitle {
+  text-align: center;
+  color: #a8a8a8;
+  font-size: 14px;
+  margin-bottom: 32px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.login-form input {
+  width: 100%;
+  background: #121212;
+  border: 1px solid #262626;
+  border-radius: 8px;
+  padding: 12px 14px;
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+}
+
+.login-form input:focus {
+  border-color: #a8a8a8;
+}
+
+.login-form input::placeholder {
+  color: #737373;
+}
+
+.login-error {
+  color: #ed4956;
+  font-size: 12px;
+  margin: -12px 0 0 4px;
+}
+
+.login-btn {
+  width: 100%;
+  background: #0095f6;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: opacity 0.2s;
+}
+
+.login-btn:hover {
+  opacity: 0.9;
+}
+
+.login-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.login-toggle {
+  text-align: center;
+  font-size: 14px;
+  color: #a8a8a8;
+  margin-top: 16px;
+}
+
+.login-toggle span {
+  color: #0095f6;
+  font-weight: 600;
+  cursor: pointer;
+}
+/* Search.css — only the page wrapper, everything else reuses Post.css */
+.search-page {
+  max-width: 470px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: #000;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+/* Navbar.css — add to your existing file */
+/* nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid #262626;
+  position: sticky;
+  top: 0;
+  background: #000;
+  z-index: 10;
+  color: white;
+}
+
+nav {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+nav a {
+  color: #fff;
+} */
+
+/* Navbar.css */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid #262626;
+  position: sticky;
+  top: 0;
+  background: #000;
+  z-index: 10;
+  color: #fff; /* makes all text white including username */
+}
+
+.nav-user-wrapper {
+  position: relative;
+  padding-bottom: 8px; /* extends hover area down to menu */
+}
+
+.nav-user {
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  color: #fff; /* explicit white */
+}
+
+.user-menu {
+  position: absolute;
+  top: 100%; /* sits right below wrapper, no gap */
+  left: 0;
+  background: #262626;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  display: none;
+  min-width: 120px;
+  z-index: 100;
+}
+
+.user-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 8px 0;
+}
+
+.user-menu li {
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 400;
+  cursor: pointer;
+  color: #fff;
+}
+
+.user-menu li:hover {
+  background: #363636;
+}
+
+.nav-user-wrapper:hover .user-menu {
+  display: block;
+}
+
+.navbar a {
+  color: #fff;
+}
+/* Pagination.css — add to your existing file */
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  padding: 16px;
+}
+
+.pagination-container .MuiPagination-root .MuiPaginationItem-root {
+  color: #fff;
+  border-color: #262626;
+}
+
+.pagination-container .MuiPagination-root .MuiPaginationItem-root.Mui-selected {
+  background-color: #0095f6;
+  border-color: #0095f6;
+  color: #fff;
+}
+
+.pagination-container .MuiPagination-root .MuiPaginationItem-root:hover {
+  background-color: #262626;
+}
+
+/* Home.css */
+.home-page {
+  max-width: 470px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: #000;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #262626;
+  border-radius: 8px;
+  margin: 12px 16px;
+  padding: 10px 14px;
+}
+
+.search-form {
+  display: flex;
+  flex: 1;
+  gap: 8px;
+}
+
+.search-bar input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+}
+
+.search-bar input::placeholder {
+  color: #a8a8a8;
+}
+
+.search-btn {
+  background: none;
+  border: none;
+  color: #0095f6;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.search-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.posts-container {
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* Post.css (shared with PostDetails) */
+.post-card {
+  border-bottom: 1px solid #262626;
+  margin-bottom: 12px;
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  padding: 10px 14px;
+  gap: 10px;
+}
+
+.user-meta {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.username {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.time {
+  font-size: 12px;
+  color: #a8a8a8;
+}
+
+.post-image {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  background: #1a1a1a;
+  cursor: pointer;
+}
+
+.post-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 14px 8px;
+}
+
+.like-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.like-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.like-icon.liked {
+  color: #ed4956;
+  fill: #ed4956;
+}
+
+.like-count {
+  font-weight: 600;
+}
+
+.action-icon {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  color: #fff;
+}
+
+/* .bookmark {
+  margin-left: auto;
+} */
+
+.post-body {
+  padding: 0 14px 12px;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.caption {
+  margin-bottom: 4px;
+}
+
+.tags {
+  color: #0095f6;
+}
+/* Create.css */
+.create-page {
+  max-width: 470px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: #000;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.create-form-wrapper {
+  width: 100%;
+  max-width: 400px;
+}
+
+.create-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.create-subtitle {
+  text-align: center;
+  color: #a8a8a8;
+  font-size: 14px;
+  margin-bottom: 32px;
+}
+
+.create-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.create-form input[type="text"] {
+  width: 100%;
+  background: #121212;
+  border: 1px solid #262626;
+  border-radius: 8px;
+  padding: 12px 14px;
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+}
+
+.create-form input[type="text"]:focus {
+  border-color: #a8a8a8;
+}
+
+.create-form input[type="text"]::placeholder {
+  color: #737373;
+}
+
+.create-form input[type="file"] {
+  width: 100%;
+  background: #121212;
+  border: 1px solid #262626;
+  border-radius: 8px;
+  padding: 12px 14px;
+  color: #a8a8a8;
+  font-size: 14px;
+  outline: none;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.create-form input[type="file"]::-webkit-file-upload-button {
+  background: #262626;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  padding: 6px 12px;
+  margin-right: 12px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.create-btn {
+  width: 100%;
+  background: #0095f6;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: opacity 0.2s;
+}
+
+.create-btn:hover {
+  opacity: 0.9;
+}
+
+.create-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+/* PostDetails.css */
+.post-details-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: #0a0a0a;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.top-bar {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid #262626;
+  position: sticky;
+  top: 0;
+  background: #0a0a0a;
+  z-index: 10;
+}
+
+.back-btn {
+  cursor: pointer;
+}
+
+.post-details-layout {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .post-details-layout {
+    flex-direction: row;
+  }
+}
+
+.post-section {
+  flex: 1;
+  min-width: 0;
+  border-bottom: 1px solid #262626;
+}
+
+@media (min-width: 768px) {
+  .post-section {
+    border-bottom: none;
+    border-right: 1px solid #262626;
+  }
+}
+
+.options-menu {
+  position: relative;
+  cursor: pointer;
+}
+
+.options-icon {
+  color: #fff;
+}
+
+.dropdown {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 28px;
+  background: #262626;
+  border-radius: 8px;
+  list-style: none;
+  padding: 8px 0;
+  margin: 0;
+  min-width: 120px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+
+.options-menu:hover .dropdown {
+  display: block;
+}
+
+.dropdown li {
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.dropdown li:hover {
+  background: #363636;
+}
+
+.comments-section {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Comments.css */
+.comments-component {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.comments-header {
+  padding: 12px 16px;
+  border-bottom: 1px solid #262626;
+  font-weight: 600;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.comments-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+}
+
+.comment-item {
+  margin-bottom: 16px;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.comment-user {
+  font-weight: 600;
+  color: #f5f5f5;
+  margin-right: 6px;
+}
+
+.comment-text {
+  color: #e0e0e0;
+}
+
+.comment-form {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-top: 1px solid #262626;
+  background: #0a0a0a;
+  flex-shrink: 0;
+}
+
+.comment-form input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+  padding: 8px 0;
+}
+
+.comment-form input::placeholder {
+  color: #a8a8a8;
+}
+
+.comment-form button {
+  background: none;
+  border: none;
+  color: #0095f6;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.comment-form button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }

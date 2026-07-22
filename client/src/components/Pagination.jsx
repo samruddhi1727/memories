@@ -9,12 +9,12 @@ const PagePagination = () => {
     const count = useSelector((state) => state.post.postCount)
 
     const pageChange = (event, value) => {
-        console.log(value); dispatch(setPage(value))
+        dispatch(setPage(value))
     }
 
     return (
         <>
-            paginationnnn
+            {/* paginationnnn */}
             <Pagination onChange={pageChange} count={count} color='primary' />
         </>
     )
