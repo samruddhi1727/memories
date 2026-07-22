@@ -12,7 +12,7 @@ const useGetPostById = (postId) => {
     useEffect(() => {
         const fetchPost = async () => {
             try {
-                console.log("custom post data by id hook")
+                
                 const { data } = await axios.get(`${bendurl}/post/getPost/${postId}`);
                 data.success ? dispatch(setPostDetails(data.post)) : toast.error(data.message);
 
